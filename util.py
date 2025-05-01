@@ -4,15 +4,14 @@ import streamlit as st
 import pyvista as pv
 from stpyvista.panel_backend import stpyvista
 
-def start_session():
-    # Create a temp directory to session data
-    TMP_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tmp')
-    os.makedirs(TMP_DIR, exist_ok=True)
-    st.session_state.temp_dir = TMP_DIR
-    
+
 def end_session():
-    # Clean up the temp directory
-    shutil.rmtree(st.session_state.temp_dir)
+    # Clean up temporary directory only if it exists
+    if hasattr(st.session_state, 'temp_dir') and os.path.exists(st.session_state.temp_dir):
+        shutil.rmtree(st.session_state.temp_dir, ignore_errors=True)
+    # Clear session state
+    for key in list(st.session_state.keys()):
+        del st.session_state[key]
 
 def render_glb(path: str) -> None:
     """ 
