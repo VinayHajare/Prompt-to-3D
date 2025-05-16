@@ -122,4 +122,5 @@ Made with ❤️ by [Vinay Hajare](https://github.com/VinayHajare)
 ## 📄 License
 
 This project is licensed under the MIT License.
-```
+
+---
